@@ -1,3 +1,4 @@
+# https://www.acmicpc.net/problem/10845
 import sys
 
 Que = []
@@ -30,4 +31,3 @@ for i in range(N):
             print(Que[-1])
         else:
             print("-1")
-    
