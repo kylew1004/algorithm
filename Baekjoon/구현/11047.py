@@ -9,4 +9,3 @@ for i in reversed(range(n)):
     k = k % coins[i] 
 
 print(cnt)
-    
