@@ -3,9 +3,9 @@
 from collections import deque
 
 def solution(queue1, queue2):
+    answer = 0
     queue1 = deque(queue1)
     queue2 = deque(queue2)
-    answer = 0
     num = queue1 + queue2
     cnt = sum(num) / 2
     queue1_sum = sum(queue1)
