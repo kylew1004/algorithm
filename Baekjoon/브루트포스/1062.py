@@ -1,33 +1,36 @@
 # https://www.acmicpc.net/problem/1062
 
+import sys
 from itertools import combinations
 
-n, k = map(int, input().split())
+n, m = map(int, sys.stdin.readline().split())
 
-if k < 5:
+words = [0] * n
+ans = 0
+for i in range(n):
+    temp = sys.stdin.readline().rstrip()
+    for x in temp:
+        words[i] |= (1 << (ord(x) - ord('a')))
+
+if m < 5:
     print(0)
-
 else:
-    k -= 5
-    nece_chars = {'a', 'n', 't', 'i', 'c'}
-    input_chars = []
-    alpha = {ky: v for v, ky in enumerate((set(map(chr, range(ord('a'), ord('z')+1))) - nece_chars))}
-    cnt = 0
+    need = ['a','c','t','i','n']
+    candidiate = list(set(chr(i) for i in range(ord('a'), ord('z') + 1)) - set(need))
 
-    for _ in range(n):
-        tmp = 0
-        for c in set(input())-nece_chars:
-            tmp |= (1 << alpha[c])
-        input_chars.append(tmp)
-    power_by_2 = (2**i for i in range(21))
+    for i in list(combinations(candidiate, m - 5)):
+        each = 0
+        res = 0
 
-    for comb in combinations(power_by_2, k):
-        test = sum(comb)
+        for j in need:
+            each |= (1 << (ord(j) - ord('a')))
+        for j in i:
+            each |= (1 << (ord(j) - ord('a')))
 
-        ct = 0
-        for cb in input_chars:
-            if test & cb == cb:
-                ct += 1
+        for j in words:
+            if each & j == j:
+                res += 1
 
-        cnt = max(cnt, ct)
-    print(cnt)
+        if ans < res:
+            ans = res
+    print(ans)
