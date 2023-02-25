@@ -1,10 +1,7 @@
 # https://school.programmers.co.kr/learn/courses/30/lessons/150366
 '''
 Union-Find => "2개의 집합의 공통 부모를 찾는 문제"에 자주 쓰임
-
-
 '''
-# https://school.programmers.co.kr/learn/courses/30/lessons/150366
 
 def solution(commands):
     answer = []
@@ -21,6 +18,7 @@ def solution(commands):
 
     for command in commands:
         coms = list(command.split(" "))
+
         if coms[0] == "UPDATE":
             length = len(coms)
             if length == 4:
@@ -28,7 +26,7 @@ def solution(commands):
                 r, c, value = int(coms[1]), int(coms[2]), coms[3]
                 r, c = find(r, c)
                 graph[r][c] = value
-            else:
+            elif length == 3:
                 value1, value2 = coms[1], coms[2]
                 for r in range(1, 51):
                     for c in range(1, 51):
@@ -41,7 +39,7 @@ def solution(commands):
             pr2, pc2 = find(r2, c2)
             if (pr1, pc1) == (pr2, pc2):
                 continue
-            value = graph[r1][c1] if graph[r1][c1] else graph[r2][c2]
+            value = graph[pr1][pc1] if graph[pr1][pc1] else graph[pr2][pc2]
             parents[pr2][pc2] = (pr1, pc1)
             graph[pr1][pc1] = value
             graph[pr2][pc2] = ''
@@ -60,7 +58,8 @@ def solution(commands):
                 parents[_r][_c] = (_r, _c)
                 graph[_r][_c] = ''
             graph[r][c] = value
-        else:
+
+        else:   # PRINT
             r, c = int(coms[1]), int(coms[2])
             r, c = find(r, c)
             answer.append(graph[r][c] if graph[r][c] else "EMPTY")
