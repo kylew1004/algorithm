@@ -49,14 +49,12 @@ while queue:
     graph[x][y] = -1
     answer = max(answer, eaten)
     move_fish(graph, fish, survived)
-    print(graph, eaten, shark_direction + 1)
+
     for i in range(1, 4):
         nx, ny = move_shark(x, y, i)
         if nx != -1:
             new_graph = deepcopy(graph)
             new_graph[x][y] = 0
             queue.append([nx, ny, eaten, new_graph, deepcopy(fish), deepcopy(survived)])
-        else:
-            break
 
 print(answer)
