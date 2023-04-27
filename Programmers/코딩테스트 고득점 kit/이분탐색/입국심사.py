@@ -10,8 +10,6 @@ def solution(n, times):
 
         for time in times:
             cnt += mid // time
-            if answer == n:
-                break
 
         if cnt >= n:
             answer = mid
